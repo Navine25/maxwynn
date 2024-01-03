@@ -1,10 +1,11 @@
 import React from "react";
 import Image from "next/image";
+import Link from 'next/link'
 
 export default function Header() {
   return (
     <header>
-      <div className="w-screen h-18 px-4 sm:px-32 grid sm:grid-cols-3 grid-cols-2">
+      <div className="min-w-screen h-18 px-4 sm:px-32 grid sm:grid-cols-3 grid-cols-2">
         <Image
           src="/maxwynn.png"
           alt="Logo"
@@ -16,7 +17,7 @@ export default function Header() {
         <div className="flex flex-row justify-center ">
           <nav className="flex flex-row gap-5 max-[321px]:gap-3 max-[321px]:text-xs items-center">
             <div>
-              <a href="">Home</a>
+              <Link href="/">Home</Link>
             </div>
             <div>
               <a href="">Games</a>
