@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import BomberSquare from "../components/bomberSquare";
 
 export default function Bomber() {
   const [numOfSquare, setNumOfSquare] = useState(2);
+  const [bombHit, setBombHit] = useState(false);
+  const [gameBomb, setGameBomb] = useState(Array.from({length: numOfSquare},()=> Array.from({length: numOfSquare}, () => null)))
 
   const increaseNumOfSquare = () => {
     if (numOfSquare < 10) {
@@ -17,6 +19,17 @@ export default function Bomber() {
       setNumOfSquare(numOfSquare - 1);
     }
   };
+
+  const randomize = () => {
+    const bombX:number = Math.floor(Math.random() * numOfSquare);
+    const bombY:number = Math.floor(Math.random() * numOfSquare);
+    console.log("bombX", bombX)
+    console.log("bombY", bombY)
+  };
+
+  useEffect(() => {
+    randomize()
+  }),[]
 
   return (
     <>
@@ -42,11 +55,14 @@ export default function Bomber() {
             +
           </button>
         </div>
-        {/* <div className={`grid grid-cols-${numOfSquare}`}> */}
-        <div className={`grid grid-cols-${numOfSquare}`}>
-        {Array(numOfSquare <= 1 ? numOfSquare : numOfSquare * numOfSquare).fill(2).map((el, i) =>
-          <BomberSquare key={i}/>
-        )}
+        <div className="flex justify-center mt-12">
+          <div className={`grid grid-cols-${numOfSquare} gap-4`}>
+            {Array(numOfSquare <= 1 ? numOfSquare : numOfSquare * numOfSquare)
+              .fill(2)
+              .map((el, i) => (
+                <BomberSquare key={i} numOfSquare={numOfSquare} bombHit={bombHit}/>
+              ))}
+          </div>
         </div>
       </div>
     </>
